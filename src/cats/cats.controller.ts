@@ -1,23 +1,23 @@
-import { CatsService } from './cats.service';
-import { Controller, Get, Post } from '@nestjs/common';
-import { Cat } from './interfaces/cat.interface';
+import { CreateCatDto } from "./dto/create-cat.dto";
+import { CatsService } from "./cats.service";
+import { Controller, Post, Body, Get } from "@nestjs/common";
+import { Cat } from "./interfaces/cat.interface";
 
-@Controller('cats')
+@Controller("cats")
 export class CatsController {
-
-  constructor(private readonly catsService: CatsService){}
+  constructor(private readonly catsService: CatsService) {}
 
   @Post()
-  async create() {
+  async create(@Body() createCatDto: CreateCatDto) {
     this.catsService.create({
-      name: 'string',
+      name: "string",
       age: 1,
-      breed: 'string'}
-    )
+      breed: "string"
+    });
   }
 
   @Get()
   async findAll(): Promise<Cat[]> {
-    return this.catsService.findAll()
+    return this.catsService.findAll();
   }
 }
