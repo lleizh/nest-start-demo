@@ -1,3 +1,4 @@
+import { ValidationPipe } from './pipe/validation.pipe';
 import { HttpExceptionFilter } from "./filter/http-exception.filter";
 import { CatsController } from "./cats/cats.controller";
 import { LoggerMiddleware, logger } from "./middleware/logger.middleware";
@@ -9,7 +10,7 @@ import {
   RequestMethod
 } from "@nestjs/common";
 import { DogsController } from "./dogs/dogs.controller";
-import { APP_FILTER } from "@nestjs/core";
+import { APP_FILTER, APP_PIPE } from "@nestjs/core";
 
 @Module({
   imports: [CoreModule],
@@ -18,6 +19,10 @@ import { APP_FILTER } from "@nestjs/core";
     {
       provide: APP_FILTER,
       useClass: HttpExceptionFilter
+    },
+    {
+      provide: APP_PIPE,
+      useClass: ValidationPipe
     }
   ]
 })
