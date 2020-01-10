@@ -1,3 +1,4 @@
+import { HttpExceptionFilter } from "./filter/http-exception.filter";
 import { CatsController } from "./cats/cats.controller";
 import { LoggerMiddleware, logger } from "./middleware/logger.middleware";
 import { CoreModule } from "./core.module";
@@ -8,11 +9,17 @@ import {
   RequestMethod
 } from "@nestjs/common";
 import { DogsController } from "./dogs/dogs.controller";
+import { APP_FILTER } from "@nestjs/core";
 
 @Module({
   imports: [CoreModule],
   controllers: [DogsController],
-  providers: []
+  providers: [
+    {
+      provide: APP_FILTER,
+      useClass: HttpExceptionFilter
+    }
+  ]
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
