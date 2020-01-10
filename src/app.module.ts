@@ -1,4 +1,5 @@
-import { ValidationPipe } from './pipe/validation.pipe';
+import { ParseIntPipe } from "./pipe/parse-int.pipe";
+import { ValidationPipe } from "./pipe/validation.pipe";
 import { HttpExceptionFilter } from "./filter/http-exception.filter";
 import { CatsController } from "./cats/cats.controller";
 import { LoggerMiddleware, logger } from "./middleware/logger.middleware";

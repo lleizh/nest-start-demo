@@ -1,4 +1,5 @@
-import { Body, Controller, Get, Post } from "@nestjs/common";
+import { ParseIntPipe } from "./../pipe/parse-int.pipe";
+import { Body, Controller, Get, Post, Param } from "@nestjs/common";
 import { ForbiddenException } from "./../exception/forbidden.exception";
 import { CatsService } from "./cats.service";
 import { CreateCatDto } from "./dto/create-cat.dto";
@@ -24,7 +25,8 @@ export class CatsController {
   }
 
   @Get(":id")
-  exp() {
+  exp(@Param("id", ParseIntPipe) id) {
+    console.log(typeof id);
     // throw new HttpException("Forbidden", HttpStatus.FORBIDDEN);
 
     // throw new HttpException({
